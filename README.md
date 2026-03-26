@@ -1,4 +1,4 @@
-# 🔍 DupeFinder AI — Smart Duplicate File Finder
+# 🔍 DupeFinder AI : Smart Duplicate File Finder
 
 A Streamlit-based desktop utility that scans your folders for duplicate and similar files using MD5 hashing, perceptual image hashing, and filename analysis.
 
@@ -56,20 +56,11 @@ dupefinder-ai/
 
 ## 🧠 How It Works
 
-1. **Exact Duplicates (MD5)** — Reads every file in chunks and computes an MD5 hash. Files with identical hashes are guaranteed to be byte-for-byte identical.
+1. **Exact Duplicates (MD5)** - Reads every file in chunks and computes an MD5 hash. Files with identical hashes are guaranteed to be byte-for-byte identical.
 
-2. **Near-Duplicate Images (pHash)** — Opens each image with Pillow, converts it to a perceptual hash (a fingerprint based on visual content), then compares hashes using Hamming distance. Images within the threshold distance are flagged as near-duplicates.
+2. **Near-Duplicate Images (pHash)** - Opens each image with Pillow, converts it to a perceptual hash (a fingerprint based on visual content), then compares hashes using Hamming distance. Images within the threshold distance are flagged as near-duplicates.
 
-3. **Similar Names** — Groups files that share the same filename stem (e.g., `report.docx` and `report.pdf`) so you can decide which version to keep.
-
----
-
-## 📸 Resume Talking Points
-
-- "Used **MD5 hashing** for O(n) exact duplicate detection instead of O(n²) pairwise comparison"
-- "Implemented **perceptual hashing** (pHash) for AI-powered image similarity without any ML model training"
-- "Built a quarantine system to safely stage files before permanent deletion"
-- "Visualized disk waste per duplicate group using **Plotly** interactive charts"
+3. **Similar Names** - Groups files that share the same filename stem (e.g., `report.docx` and `report.pdf`) so you can decide which version to keep.
 
 ---
 
