@@ -14,6 +14,9 @@ import humanize  # pip install humanize
 import io
 import base64
 from fpdf import FPDF
+import tkinter as tk
+from tkinter import filedialog
+
 try:
     from thefuzz import fuzz
 except ImportError:
@@ -473,11 +476,32 @@ with st.sidebar:
     st.markdown("## ⚙️ Settings")
     st.divider()
 
-    folder_input = st.text_input(
-        "📁 Folder Path",
-        placeholder="e.g. C:\\Users\\You\\Documents",
-        help="Paste the full path to the folder you want to scan."
-    )
+    if "folder_path" not in st.session_state:
+        st.session_state.folder_path = ""
+
+    col1, col2 = st.columns([3, 1])
+    with col2:
+        st.write("")
+        st.write("")
+        if st.button("Browse"):
+            root = tk.Tk()
+            root.withdraw()
+            root.wm_attributes('-topmost', 1)
+            folder = filedialog.askdirectory(master=root)
+            root.destroy()
+            if folder:
+                st.session_state.folder_path = folder
+                st.rerun()
+
+    with col1:
+        folder_input = st.text_input(
+            "📁 Folder Path",
+            value=st.session_state.folder_path,
+            placeholder="e.g. C:\\Users\\You\\Documents",
+            help="Paste the full path to the folder you want to scan."
+        )
+        if folder_input != st.session_state.folder_path:
+            st.session_state.folder_path = folder_input
 
     scan_subfolders = st.toggle("Scan Subfolders", value=True)
 
