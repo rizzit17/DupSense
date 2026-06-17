@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DupSense | Premium Local Storage Manager</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#131313',
+                        mint: '#4edea3',
+                        mintDim: 'rgba(78, 222, 163, 0.1)',
+                        slate: '#e5e2e1',
+                        slateMuted: '#86948a',
+                        borderGray: '#2a2a2a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 40px rgba(78, 222, 163, 0.3);
+        }
+
+        .feature-card {
+            background: linear-gradient(180deg, rgba(30, 30, 30, 0.5) 0%, rgba(20, 20, 20, 0.5) 100%);
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #4edea3;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(78, 222, 163, 0.05);
+        }
+
+        .btn-primary {
+            background-color: #4edea3;
+            color: #131313;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #3bc68d;
+            box-shadow: 0 0 20px rgba(78, 222, 163, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn-outline {
+            border: 1px solid #4edea3;
+            color: #4edea3;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(78, 222, 163, 0.1);
+            transform: scale(1.02);
+        }
+
+        /* Floating animation for hero icon */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen relative overflow-x-hidden font-sans selection:bg-mint selection:text-dark">
+
+    <!-- Grid Background Layer -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-[-1]"></div>
+
+    <!-- Navbar -->
+    <nav class="border-b border-borderGray bg-dark/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-mint font-mono font-bold text-xl">DupSense<span class="animate-pulse">_</span></span>
+            </div>
+            <a href="https://github.com/rizzit17/DupSense" target="_blank"
+                class="text-slateMuted hover:text-mint font-mono text-sm transition-colors flex items-center gap-2">
+                <span>[View Source]</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="max-w-6xl mx-auto px-6 pt-24 pb-20 flex flex-col items-center text-center">
+
+        <div
+            class="w-20 h-20 bg-mintDim border border-mint/30 rounded-2xl flex items-center justify-center mb-8 animate-float shadow-[0_0_30px_rgba(78,222,163,0.2)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-mint" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 glow-text text-white">
+            Reclaim Your Storage.<br />
+            <span class="text-mint font-mono font-normal text-4xl md:text-6xl tracking-tight">Zero Cloud
+                Required.</span>
+        </h1>
+
+        <p class="text-slateMuted text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
+            DupSense is a premium desktop utility that finds exact duplicates, visually similar images, and highly
+            identical text files.
+            All processing is 100% local. Your files never leave your machine.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <!-- Link this to your GitHub Release URL -->
+            <a href="https://github.com/rizzit17/DupSense/releases/download/v1.0.0/run_dupsense.exe"
+                class="btn-primary font-mono font-bold px-8 py-4 rounded-lg flex items-center justify-center gap-3 w-full sm:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                </svg>
+                Download for Windows
+            </a>
+            <a href="https://github.com/rizzit17/DupSense" target="_blank"
+                class="btn-outline font-mono font-bold px-8 py-4 rounded-lg flex items-center justify-center gap-3 w-full sm:w-auto">
+                View on GitHub
+            </a>
+        </div>
+
+        <p class="mt-6 text-slateMuted text-sm font-mono opacity-60">Version 1.0.0 • Requires Windows 10/11</p>
+    </main>
+
+    <!-- Visual Dashboard Teaser -->
+    <section class="max-w-5xl mx-auto px-6 mb-32 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-mint/10 to-transparent blur-3xl -z-10 rounded-full"></div>
+        <div class="rounded-xl border border-borderGray bg-dark/50 p-2 shadow-2xl backdrop-blur-sm">
+            <div
+                class="rounded-lg overflow-hidden border border-borderGray/50 bg-[#1e1e1e] aspect-video relative flex items-center justify-center">
+                <!-- Placeholder for actual app screenshot -->
+                <p class="font-mono text-mint/50">[ Insert High-Res App Screenshot Here ]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="max-w-6xl mx-auto px-6 pb-32">
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold mb-2">Pro-Level Features</h2>
+            <p class="font-mono text-mint">Engineered for accuracy and safety.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Card 1 -->
+            <div class="feature-card p-8 rounded-xl">
+                <div class="font-mono text-mint text-sm mb-4 tracking-wider uppercase">01 // AI Image Diffing</div>
+                <h3 class="text-xl font-bold text-white mb-3">Side-by-Side Comparison</h3>
+                <p class="text-slateMuted text-sm leading-relaxed">
+                    Uses perceptual hashing (pHash) to find images that are visually identical, even if compressed,
+                    resized, or watermarked. Blow them up side-by-side to make the final call.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="feature-card p-8 rounded-xl">
+                <div class="font-mono text-mint text-sm mb-4 tracking-wider uppercase">02 // Safe Zones</div>
+                <h3 class="text-xl font-bold text-white mb-3">Absolute Directory Protection</h3>
+                <p class="text-slateMuted text-sm leading-relaxed">
+                    Declare critical paths like `C:\Windows`. DupSense will scan them to find duplicates elsewhere, but
+                    will actively block you from ever deleting the protected originals.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="feature-card p-8 rounded-xl">
+                <div class="font-mono text-mint text-sm mb-4 tracking-wider uppercase">03 // Text Similarity</div>
+                <h3 class="text-xl font-bold text-white mb-3">Fuzzy Code Matching</h3>
+                <p class="text-slateMuted text-sm leading-relaxed">
+                    Powered by thefuzz. Scans code files, markdown, and essays to detect versions that are 90% identical
+                    in content, catching the "final_final_v2.txt" clutter.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="feature-card p-8 rounded-xl">
+                <div class="font-mono text-mint text-sm mb-4 tracking-wider uppercase">04 // Data Visualization</div>
+                <h3 class="text-xl font-bold text-white mb-3">Interactive Treemaps</h3>
+                <p class="text-slateMuted text-sm leading-relaxed">
+                    Stop guessing where your storage went. View massive Plotly-powered Treemaps that visualize your
+                    directory hierarchy and pinpoint exactly which folders are hoarding duplicates.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-borderGray bg-dark">
+        <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="font-mono text-slateMuted text-sm">
+                Built locally. Protected completely.
+            </div>
+            <div class="font-mono text-slateMuted text-sm">
+                &copy; 2026 Rishit.
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
