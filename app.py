@@ -485,16 +485,23 @@ with st.sidebar:
         st.write("")
         if st.button("Browse"):
             import subprocess
-            import sys
+            import os
             
-            # Run tkinter in a separate process to avoid Tcl_AsyncDelete threading issues in Streamlit
-            cmd = [
-                sys.executable, '-c',
-                'import tkinter as tk; from tkinter import filedialog; root = tk.Tk(); root.withdraw(); root.wm_attributes("-topmost", 1); print(filedialog.askdirectory(master=root))'
-            ]
+            # Use PowerShell to open a folder picker natively on Windows.
+            # This completely avoids Tkinter threading errors and works perfectly inside a PyInstaller .exe
+            ps_script = (
+                "Add-Type -AssemblyName System.windows.forms; "
+                "$f = New-Object System.Windows.Forms.FolderBrowserDialog; "
+                "$f.Description = 'Select a folder'; "
+                "if($f.ShowDialog() -eq 'OK') { Write-Output $f.SelectedPath }"
+            )
             try:
-                result = subprocess.run(cmd, capture_output=True, text=True)
+                # 0x08000000 is CREATE_NO_WINDOW to hide the terminal pop-up
+                creationflags = 0x08000000 if os.name == 'nt' else 0
+                result = subprocess.run(["powershell", "-NoProfile", "-Command", ps_script],
+                                        capture_output=True, text=True, creationflags=creationflags)
                 folder = result.stdout.strip()
+                
                 if folder:
                     st.session_state.folder_path = folder
                     st.rerun()
