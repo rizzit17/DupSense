@@ -484,14 +484,22 @@ with st.sidebar:
         st.write("")
         st.write("")
         if st.button("Browse"):
-            root = tk.Tk()
-            root.withdraw()
-            root.wm_attributes('-topmost', 1)
-            folder = filedialog.askdirectory(master=root)
-            root.destroy()
-            if folder:
-                st.session_state.folder_path = folder
-                st.rerun()
+            import subprocess
+            import sys
+            
+            # Run tkinter in a separate process to avoid Tcl_AsyncDelete threading issues in Streamlit
+            cmd = [
+                sys.executable, '-c',
+                'import tkinter as tk; from tkinter import filedialog; root = tk.Tk(); root.withdraw(); root.wm_attributes("-topmost", 1); print(filedialog.askdirectory(master=root))'
+            ]
+            try:
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                folder = result.stdout.strip()
+                if folder:
+                    st.session_state.folder_path = folder
+                    st.rerun()
+            except Exception as e:
+                st.error(f"Failed to open folder picker: {e}")
 
     with col1:
         folder_input = st.text_input(
